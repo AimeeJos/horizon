@@ -26,7 +26,7 @@
 Clone the project
 
 ```bash
-  git clone <link provided>
+  git clone https://github.com/AimeeJos/horizon.git
   cd horizon
 ```
 
@@ -41,21 +41,24 @@ Start the server
 ```bash
   docker compose up
 ```
-Run the server, api documentaion:
+Run the server:
 
 ```bash
   https://localhost:8000
 ```
 
-    
-## Admin Panel 
+Create superuser:
 
-###### https://localhost:8000/admin
+```bash
+   docker-compose run --rm app sh -c "python manage.py createsuperuser"
+```
 
+Admin Panel 
+```bash
+ https://localhost:8000/admin
+```
 
-
-## Details
-######  Tables 
+######  Tables/Models 
 - Categories
 - Sentences
 
