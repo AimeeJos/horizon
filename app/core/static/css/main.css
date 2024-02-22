@@ -1,0 +1,56 @@
+.sidebar{
+background-color: rgb(232, 232, 235);
+height: 100%;
+width: 25%;
+position:fixed!important;
+z-index:1;
+overflow:auto;
+padding: 5px;
+}
+
+.content {
+margin-left: 27%;
+padding: 5px;
+}
+li{
+    margin: 8px;
+}
+.eachcoloumn{
+    margin-top: 5px;
+}
+.scrollable-div {
+    width: auto; 
+    height: 500px; 
+    overflow: auto; 
+    position: relative;
+    bottom: 1px;
+}
+
+.formbar{    
+    width: 70%;
+    z-index:1;
+    margin: 5px;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    left: 25%;
+    }
+
+form{
+    border: 1px solid rgb(197, 204, 224);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+@media only screen and (max-width: 767px) {
+.normaldevice{
+    display: none;
+}
+
+}
+
+@media only screen and (min-width: 767px) {
+.smalldevice{
+display: none;
+}
+}

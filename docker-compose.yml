@@ -1,0 +1,94 @@
+version: "3.9"
+
+services:
+  redis:
+      image: redis
+      # ports:
+      #   - "6379:6379"
+      volumes:
+        - ./redisdata:/data
+        - dev-static-data:/vol/web
+
+  app:
+    build:
+      context: .
+      args:
+      - DEV=true
+    ports:
+      - "8000:8000"
+    env_file:
+        - .env
+    volumes:
+      - ./app:/app
+      - dev-static-data:/vol/web
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+
+    environment:
+      - DB_HOST=db
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
+
+  celery:
+      restart: always
+      build:
+        context: .
+      command: celery -A app worker -l info
+      volumes:
+        - ./app:/app
+        - dev-static-data:/vol/web      
+      depends_on:
+        - db
+        - redis
+        - app
+
+  worker_channels:
+    build:
+      context: .
+      args:
+        - DEV=true
+    command: python manage.py runworker websocket
+    volumes:
+      - ./app:/app
+      - dev-static-data:/vol/web
+    depends_on:
+      - redis
+    env_file:
+      - .env
+  
+  channels:
+    build:
+      context: .
+      args:
+        - DEV=true
+    command: daphne -b 0.0.0.0 -p 8001 app.asgi:application
+    volumes:
+      - ./app:/app
+      - dev-static-data:/vol/web
+    expose:
+      - 8001
+    depends_on:
+      - redis
+    env_file:
+      - .env
+
+
+volumes:
+  dev-db-data:
+  redisdata:
+  dev-static-data:

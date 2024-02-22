@@ -1,0 +1,38 @@
+Django>=3.2.4,<3.3
+# psycopg2>=2.8.6,<2.9
+# Django==4.2
+psycopg2-binary
+
+djangorestframework>=3.12.4,<3.13
+
+openpyxl==3.1.2
+
+celery==5.2.6
+django-celery-results==2.2.0
+
+redis==3.4.1
+django-redis==5.2.0
+httpie==3.2.1
+
+daphne
+channels==3.0.5
+djangochannelsrestframework==1.1.0
+channels-redis
+
+
+django-cors-headers==3.13.0
+# gunicorn==20.1.0
+python-dotenv==0.21.0
+
+transformers==4.37.2
+torch==2.2.0
+
+
+
+
+
+
+
+
+
+
