@@ -15,8 +15,7 @@ import json
 
 def dashboard(request):
     categories = Categories.objects.all()
-    default = categories[0].name if len(categories) != 0 else None
-    category_selected = request.GET.get("category", default)
+    category_selected = request.GET.get("category", None)
     sentences = None
     form = SentenceForm()
     taskid = 0
@@ -28,10 +27,10 @@ def dashboard(request):
 
     if request.method == "POST":
         new_sentence = request.POST.get("text", None)
-        category = Categories.objects.get(name=category_selected)
-        sentence_id = Sentences.objects.create(category=category, text=new_sentence)
-        sentence_id = sentence_id.id
-        task = do_sentiment_analysis.apply_async(args=[new_sentence, sentence_id])
+        # category = Categories.objects.get(name=category_selected)
+        # sentence_id = Sentences.objects.create(category=category, text=new_sentence)
+        # sentence_id = sentence_id.id
+        task = do_sentiment_analysis.apply_async(args=[new_sentence])
         taskid = task.id
     context = {
         "categories": categories if len(categories) != 0 else None,

@@ -38,5 +38,7 @@ class Sentences(models.Model):
             "Neutral": "bg-secondary",
             "Negative": "bg-danger",
         }
-        colour_class = COLOUR_CLASSES[self.sentiment] if self.sentiment else " "
+        colour_class = (
+            COLOUR_CLASSES[self.sentiment] if self.sentiment else " bg-secondary"
+        )
         return colour_class
