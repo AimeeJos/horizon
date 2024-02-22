@@ -79,7 +79,7 @@
       <div class="container formbar">
         
         <div class="alert alert-success" role="alert" id="alertbox">
-          <p id="alert_message"></p>
+          <p id="alert_message" hidden >Loading ...</p>
           <div class="progress" style="height: 5px;">
             <div class="progress-bar" id="progressbar" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
           </div>
@@ -117,11 +117,14 @@
                     if(socketdata.percentage_complete.status === 'sentiment_updated'){
                       const percentage = socketdata.percentage_complete.taskid.percentage
                       console.log(percentage)
-                      //const alert_message = document.getElementById("alert_message")
+                      const alert_message = document.getElementById("alert_message")
                       const progressbar = document.getElementById("progressbar")
                       progressbar.style = `width: ${percentage}%`
-
+                      if(percentage === '10'){
+                          alert_message.hidden = false
+                      }
                       if(percentage === '100'){
+                        alert_message.hidden = true
                         const selected_category = socketdata.percentage_complete.taskid.selected_category
                         if(selected_category === null){
                           alert("something went wrong try again ...")

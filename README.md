@@ -47,6 +47,8 @@ Run the server:
   https://localhost:8000
 ```
 
+###### Add the first sentence, and wait for the models to load.
+  
 Create superuser:
 
 ```bash

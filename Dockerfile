@@ -41,6 +41,7 @@ RUN apt-get update && \
         django-user \
     && mkdir -p /vol/web/media \
     && mkdir -p /vol/web/static \
+    && mkdir -p /app/analysys \
     && chown -R django-user:django-user /vol \
     && chmod -R 755 /vol \
     && chown -R django-user:django-user /app/analysys \
