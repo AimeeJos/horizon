@@ -26,7 +26,7 @@
 Clone the project
 
 ```bash
-  git clone <link provided>
+  git clone https://github.com/AimeeJos/horizon.git
   cd horizon
 ```
 
